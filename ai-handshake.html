@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OMEGA Layer 8 — AI Handshake</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f8fc;color:#15293f;font:16px/1.55 system-ui,sans-serif}
+main{max-width:42rem;margin:0 auto;padding:1.1rem}h1{font-size:1.65rem;line-height:1.2;margin-bottom:.2rem}h2{font-size:1.12rem;margin-top:1.5rem}
+.card{background:white;border:1px solid #cdd9e7;border-radius:12px;padding:1rem;margin:.8rem 0}
+.muted{color:#596b7d}.tag{font-weight:700;color:#0b5793}
+textarea{width:100%;min-height:18rem;resize:vertical;padding:.7rem;border:1px solid #74869c;border-radius:8px;background:#fff;color:#15293f;font:14px/1.42 ui-monospace,monospace}
+#reply{min-height:12rem}button{display:inline-block;border:0;border-radius:8px;background:#0759aa;color:#fff;padding:.68rem 1rem;font-weight:700;margin:.45rem .4rem .45rem 0;cursor:pointer}
+a{color:#0759aa}#report{white-space:pre-wrap;border-left:3px solid #0759aa;padding:.6rem;margin-top:.3rem}li{margin:.45rem 0}
+footer{font-size:.85rem;color:#596b7d;margin:2rem 0}
+</style></head>
+<body><main>
+<h1>OMEGA Layer 8 — AI Handshake</h1>
+<p class="tag">Stage 8 / Inference transport acceptance</p>
+<p>Use Opera Mini's built-in AI on Vodacom's supported free browsing, then verify a small structured response. This page is static and collects nothing.</p>
+<div class="card"><h2>1. Keep the transport honest</h2>
+<ol><li>Use your Vodacom SIM, with Wi-Fi OFF and mobile data ON. Use Opera Mini Data Savings.</li>
+<li>For isolation, disconnect the separate Tailscale VPN during this test.</li>
+<li>In Opera Mini tap the <strong>menu</strong>, then its <strong>AI assistant</strong> (or AI on the start page).</li></ol>
+<p class="muted">If AI is not visible, update Opera Mini on Wi-Fi. This test does not require Claude subscriptions, paid API tokens, or bypassing data accounting.</p></div>
+<div class="card"><h2>2. Ask the AI</h2>
+<p>Copy the following instruction into Opera Mini AI. It requests reasoning only; it never authorizes a command.</p>
+<textarea id="prompt" readonly aria-label="AI acceptance prompt">OMEGA LAYER 8 — CONTROLLED INFERENCE TEST
+Challenge: OMEGA-L8-20261110-REDMI-817
+You are one AI participant in an experiment. Do not claim you connected to a server, executed code, changed a VPN, or received a message from another AI.
+
+Facts: On a Vodacom SIM without a purchased data bundle, OMEGA test pages B and C loaded in Opera Mini on 4G. Opera's free-browsing allowance includes Opera Mini AI chat. Ordinary Android VPN traffic has NOT been proven zero-rated. OMEGA must preserve task state outside any one AI provider.
+
+Task: Propose the smallest useful and truthful way for this AI to assist OMEGA today. Compare A (text-only AI inside Opera Mini, manual verified handoff) and B (claim unrestricted free VPN access). Select the evidence-supported route, explain one tradeoff, and propose one NEXT experiment.
+
+Return exactly these six lines, with your own meaningful wording after the colons:
+CHALLENGE: OMEGA-L8-20261110-REDMI-817
+MODE: INFERENCE_ONLY
+ROUTE: [choose A or B]
+REASON: [one sentence based on the facts]
+NEXT_EXPERIMENT: [one test with measurable pass/fail result]
+LIMITATION: [one truthful operational limitation]</textarea>
+<button type="button" id="copy">Copy AI instruction</button>
+<p id="copyStatus" class="muted" role="status">If the button cannot copy, long-press the text above and choose Copy.</p></div>
+<div class="card"><h2>3. Inspect the reply</h2>
+<p>Paste the AI's six lines here to check their shape locally. The page does <strong>not</strong> upload your reply.</p>
+<textarea id="reply" aria-label="AI reply" placeholder="Paste the AI's reply here"></textarea>
+<button type="button" id="verify">Check reply format</button>
+<p id="report" role="status">Not checked.</p>
+<p>The local format checker confirms the challenge and fields, not independently model identity or mobile billing. Share the AI response with Node One for review.</p></div>
+<p><a href="index.html">Back to Stage 0</a> · <a href="check-1110-b.html">Check browser marker B</a></p>
+<footer>Static OMEGA acceptance artifact. No analytics, API calls, accounts, device controls, secrets, or tunneling. Manual copy/paste works even if browser scripts are unavailable.</footer>
+<script>
+(function(){
+var p=document.getElementById('prompt'),r=document.getElementById('reply');
+document.getElementById('copy').onclick=function(){
+var status=document.getElementById('copyStatus');
+function fallback(){p.focus();p.select();status.textContent='Text selected. Use Copy in your browser menu.'}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(p.value).then(function(){status.textContent='Instruction copied.'},fallback)}else{fallback()}
+};
+document.getElementById('verify').onclick=function(){
+var expected=['CHALLENGE','MODE','ROUTE','REASON','NEXT_EXPERIMENT','LIMITATION'],lines=r.value.trim().split(/\r?\n/).filter(Boolean),fields={};
+lines.forEach(function(line){var m=line.match(/^([A-Z_]+):\s*(.*)$/);if(m)fields[m[1]]=m[2].trim()});
+var missing=expected.filter(function(k){return !fields[k]}),challenge=fields.CHALLENGE==='OMEGA-L8-20261110-REDMI-817',mode=fields.MODE==='INFERENCE_ONLY',route=fields.ROUTE==='A';
+var ok=missing.length===0&&lines.length===6&&challenge&&mode&&route;
+document.getElementById('report').textContent=(ok?'FORMAT PASS':'FORMAT INCOMPLETE')+'\nChallenge: '+(challenge?'match':'missing/mismatch')+'\nRoute: '+(fields.ROUTE||'missing')+'\nLines: '+lines.length+'/6'+(missing.length?'\nMissing fields: '+missing.join(', '):'')+'\nNext: send the reply for human review. This is NOT proof of billing.';
+};
+})();
+</script></main></body></html>

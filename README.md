@@ -7,3 +7,7 @@ Contains no secrets, user information, network configuration, APIs, authenticati
 Acceptance: from Redmi 13C on Vodacom SIM, mobile data ON, Wi-Fi OFF, Tailscale OFF, Opera Mini Data Savings ON: observe "Free data: Active" and first-time loads of MARKER-B and MARKER-C. The developer's own desktop curl is ONLY a hosting acceptance, not carrier-free browsing evidence.
 
 Published through GitHub Pages from `main:/`. The OMEGA private PCVPS and Aletheia repositories are not published. Operates without a paid hosting plan or dynamic backend.
+
+## Stage 8: AI handshake (2026-11-10)
+
+The ai-handshake.html page is a static six-line inference response challenge for Opera Mini built-in AI. It has a manual copy fallback, local-only reply format check, and no backend or data collection. It is NOT a command bus and does NOT claim AI execution or operator-billing proof. Acceptance requires a first-hand AI response from the user on Vodacom mobile data and independent review. The public challenge marker is not an authentication secret.
